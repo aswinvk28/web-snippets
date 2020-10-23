@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<title>Eventbrite - Event Calendar Widget</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="calendar-widget_data/jsi18n_en-us.js"></script>
+
+	<script type="text/javascript" src="calendar-widget_data/jquery-1.js"></script>
+
+	<script type="text/javascript">
+		jQuery.noConflict();
+		//=====================================================
+		//== store customized Color                         ===
+		//=====================================================
+		var gDisableYuiLoader		= 1;
+		var currentWidget			= 'CALENDAR-IFRAME';
+		var currentWidgetreferral	= 'ecal';
+		
+		    var monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    var dayNames = ["S","M","T","W","T","F","S"];
+    var firstWeekDay = 6;
+
+	//=========================
+	//===== Color Options =====
+	//=========================
+	var userMessageColor 				= '#009EDB';
+	var userBackgroundColor				= '#ffffff';
+	var userThinOutlineColor			= '#EF7F2C';
+	var userThickOutlineColor			= '#EF7F2C';
+	var userTextColor					= '#000000';
+
+	var eventUserMessageColor 			= '#ef812c';
+	var eventUserBackgroundColor		= '#eeeeee';
+	var eventUserThinOutlineColor		= '#eeeeee';
+	var eventUserThickOutlineColor		= '#ef812c';
+	var eventUserTextColor				= '#069fdb';
+
+	var previousUserMessageColor 		= '#009EDB';
+	var previousUserBackgroundColor		= '#ffffff';
+	var previousUserThinOutlineColor	= '#EF7F2C';
+	var previousUserThickOutlineColor	= '#EF7F2C';
+	var previousUserTextColor			= '#000000';
+
+	var userMessageSize 		= '';
+	var clip 					= null;
+	var googleToken;
+	var gClickOnCreateWidget	= 0;
+	var gSelectCurrentEID		= '2804934635'								; // == current event id
+	var gOriginalCurrentEID		= '2804934635'								; // == Original current event id
+    var gEventListed = '1'; //  original event listed type
+    var baseUrl					= 'http://www.eventbrite.co.uk'									; // == server Url 
+	var gWidgetFooterLink 		= '';
+	
+	var showPrivateEvents =  ('false' === 'true');
+	var selectedEventDate = '2013/01/17';
+	var eventSig = '';
+	//===========================================
+	//===== Toggle CountDown Frame Component ====
+	//===========================================
+	if (currentWidget == 'CALENDAR'  || currentWidget == 'COUNTDOWN' || currentWidget == 'CALENDAR-IFRAME'  || currentWidget == 'COUNTDOWN-IFRAME') {
+		var gSelectComponent = {};
+		var gOriginalSelectComponent = {};
+gSelectComponent['eventbranding']=0;
+gSelectComponent['eventlogo']=0;
+gSelectComponent['eventname']=1;
+gSelectComponent['eventdate']=1;
+gSelectComponent['eventvenue']=0;
+gSelectComponent['eventlocation']=0;
+gSelectComponent['eventregister']=1;
+gSelectComponent['eventtweeter']=1;
+	}
+
+	//=====================================================
+	//== store all available Event and Start Date / EID ===
+	//=====================================================
+	if (currentWidget == 'CALENDAR' ||  currentWidget == 'CALENDAR-IFRAME') {
+		var gTabEventDate = new Array();
+		var gTabEventDateEID = new Array();
+		var gTabEventDateOrg = new Array();
+		var gTabNbrEventDate =  new Array();   
+		var gTabHasPublicEventsDate = [];
+		var gTabEventDatePublicEID = [];
+		var gTabEventReference = {};
+		var gTabEventOrganizerReference = {};
+		var gTabEventOrganizerIdReference = {};
+		var gTabEventListedReference = {};
+		var gTabEventDateReference = {};
+		var gTabEventDateListReference = {};
+		var gTabEventSigReference = {};
+		var gTabEventSigDate = {};
+
+		var nbDate = -1;
+
+			nbDate += 1;
+			gTabEventDate.push('2013/01/17');
+			gTabEventDateEID.push('2804934635');
+			gTabEventDateOrg.push('1608708682');
+			gTabNbrEventDate.push('1');
+			gTabHasPublicEventsDate.push('1');
+			gTabEventDatePublicEID.push('2804934635');
+			gTabEventSigDate['2804934635'] = 'AGbIMNy_ZyaRHns0KodwQHIrKr8gAGkSYQ';
+
+			nbDate += 1;
+			gTabEventDate.push('2012/12/06');
+			gTabEventDateEID.push('2804934635');
+			gTabEventDateOrg.push('1608708682');
+			gTabNbrEventDate.push('1');
+			gTabHasPublicEventsDate.push('1');
+			gTabEventDatePublicEID.push('2804934635');
+			gTabEventSigDate['2804934635'] = 'AGbIMNy_ZyaRHns0KodwQHIrKr8gAGkSYQ';
+
+			nbDate += 1;
+			gTabEventDate.push('2013/02/21');
+			gTabEventDateEID.push('2942752853');
+			gTabEventDateOrg.push('1608708682');
+			gTabNbrEventDate.push('1');
+			gTabHasPublicEventsDate.push('1');
+			gTabEventDatePublicEID.push('2942752853');
+			gTabEventSigDate['2942752853'] = 'AGbIMNxcxy1qq-s9QFMSef3-qQJ5Skvxog';
+
+
+			gTabEventReference['2804934635'] = 'Get Slim Guaranteed Seminar'		;     
+			gTabEventOrganizerReference['2804934635'] = 'Body Mind Training'		;
+			gTabEventOrganizerIdReference['2804934635'] = '1608708682';
+			gTabEventListedReference['2804934635'] = 1;
+			gTabEventDateReference['2804934635'] = '2013/01/17';
+			gTabEventDateListReference['2804934635'] = '2013/01/17,2012/12/06';
+			gTabEventSigReference['2804934635'] = 'AGbIMNy_ZyaRHns0KodwQHIrKr8gAGkSYQ';
+
+			gTabEventReference['2942752853'] = 'Networking and Training'		;     
+			gTabEventOrganizerReference['2942752853'] = 'Body Mind Training'		;
+			gTabEventOrganizerIdReference['2942752853'] = '1608708682';
+			gTabEventListedReference['2942752853'] = 1;
+			gTabEventDateReference['2942752853'] = '2013/02/21';
+			gTabEventDateListReference['2942752853'] = '2013/02/21';
+			gTabEventSigReference['2942752853'] = 'AGbIMNxcxy1qq-s9QFMSef3-qQJ5Skvxog';
+
+		
+		//========================================
+		//=== Global Calendar Parameters	   ===
+
+			var gTotalFoundLiveEvent = 4 ;
+													  // == total number of Live events found for this user	
+		var gSelectCalendarType = 'ALL'				; // == default Calendar type
+		var previousSelectCalendarType = 'ALL'		; // == default Calendar type  (original value)
+		var gFilterByOrganizer = ''															; // filter event date by Current organizer
+		var firstEventDate =  new Date('2013/01/17')					; // start date of current event   
+		var gCurrentMonth = '1'							; // current Calendar's Month 
+		var gCurrentYear = '2013'								; // current Calendar's Year 
+		var gOriginalMonth = '1'							; // Original Calendar's Month 
+		var gOriginalYear = '2013'								; // Original Calendar's Year 
+		var gSelectCurrentOrganizer = '1608708682'  					; // == current event's Organizer
+		var gLastDisplayEvent = ''															;  // store   last Event ID displayed on Calendar
+		var gLastDisplayDateEvent = ''														;  // store   last Start Event date displayed on Calendar
+		var gLastDisplayOrg = ''															;  // store   last selected Organizer displayed on Calendar
+		var gLastDisplayListedType = '';
+		var gTwitterUrl = ''																;  // store current twitter Url
+		
+		var gCurrentCalendarDate = new Date(gCurrentYear + '/' + PadDigits(gCurrentMonth,2) + '/01'); // Current Date YYYY/MM/DD (in JS Format) 
+		var gCurrentOrganizer = ''					; // current Calendar's Organizer
+		var gLastMonth = gCurrentMonth														;
+		var gLastYear = gCurrentYear														;
+		var newDate = new Date()															;
+		var gActualYear =  newDate.getFullYear()											;  // new current Year
+		var gActualMonth =  newDate.getMonth() + 1											;  // new current Month
+		//===============================================
+		//== manage multiple event's per calendar Day ===
+		var gEventShortDates = ''                                							; // short date for Multiple event title
+		var	gNbrEventByDate = 0				   												; // nbr event for same date
+		var	gArrayEID		= new Array()   												; // Eid List
+		var	gArrayEventName = new Array()   												; // title List
+		var gArrayEventTime = new Array()													; // event start time
+		var gArrayEventOrganizer = new Array()												; // organlizer list if multiple event for same date
+		var gArrayEventLocation = new Array()												; // Event's location
+		var gCalendarSelectDate = ''														; // current calendar selected date
+		var gMaxEventPerDay = 20															; // max allowed event per day
+		var gLastCalendarDivSelected = ''													; // last Calendar Div selected
+	}
+
+	var iframeString = '';
+	var globalTableId = 0;
+	var gCptTextLink = 0;
+	var googleMyServices;
+	var gButtonWidthIframe = 250;
+	var gButtonHeightIframe = 500;
+	
+	//======================================
+	//== Padding Function				=== 
+	//======================================
+	function PadDigits(n, totalDigits) {
+		n = n.toString();
+		var pd = '';
+		if (totalDigits > n.length) { 
+			for (i=0; i < (totalDigits-n.length); i++) {
+				pd += '0';
+			}
+		}
+		return pd + n.toString();
+	}
+	
+	//==========================================
+	//== init clip  Board function			==
+	//==========================================
+	
+	function initZeroClipBoard() {
+		if (!ie) {
+			document.getElementById('d_clip_button').style.display  = 'inline';
+			try {
+				ZeroClipboard.setMoviePath('http://www.eventbrite.co.uk/static/swf/ZeroClipboard.swf');
+				clip = new ZeroClipboard.Client();
+				clip.setHandCursor( true );
+				clip.addEventListener('load', loadCopyClip);
+				clip.addEventListener('complete', completeCopyClip);
+				clip.addEventListener('mouseOver', copyZeroClipBoard);
+				clip.glue( 'd_clip_button' );
+			} catch(err) {}
+		} else {
+			document.getElementById('buttonCopy2').style.display  = 'block';
+		}
+	}
+	
+
+
+	</script>
+	<script type="text/javascript" src="calendar-widget_data/prototype16-min.js"></script>
+    <script type="text/javascript" src="calendar-widget_data/widgets.js"></script>
+
+	<script type="text/javascript" src="calendar-widget_data/widgets_calendar.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="calendar-widget_data/widget-css.css">
+</head>
+
+<body class="lang-en en-us yui-skin-sam">
+	<div id="display_eventbranding" style="display: none;">
+    <div id="widget-branding"><span class="text"><a href="http://get-slim-guaranteed-seminar-2012.eventbrite.co.uk/?ref=ecal" target="_blank">
+             Find this event </a> on </span><a href="http://www.eventbrite.co.uk/r/ecallogo" target="_blank">
+        <img src="calendar-widget_data/eb_logo_tiny_tm-trans.png" alt="Eventbrite (TM)" align="absmiddle">
+    </a></div>
+</div>
+
+<div style="display: block;" id="ebcalendar">
+	<!-- THIN LINE -->
+	<div class="innerbackground" id="innerbackground">
+
+        <!-- MONTH -->
+        <div id="monthcontainer">
+            <a style="background-color: rgb(239, 127, 44);" href="javascript:%20changeMonth('PREV');" id="PREV_button" title="Previous Month">&lt;</a> 
+            <span title="1 Event found on January" id="currentMonth">January 2013</span>
+            <a style="background-color: rgb(239, 127, 44);" href="javascript:%20changeMonth('NEXT');" id="NEXT_button" title="Next Month">&gt;</a>
+        </div>
+
+        <!-- DAYS -->
+        <div id="dayscontainer">
+
+        	<ul>
+        		    <li title="Sunday">S</li>
+        		    <li title="Monday">M</li>
+        		    <li title="Tuesday">T</li>
+        		    <li title="Wednesday">W</li>
+        		    <li title="Thursday">T</li>
+        		    <li title="Friday">F</li>
+        		    <li title="Saturday">S</li>
+        	</ul>
+        	<div class="clear"></div>
+        </div>
+
+        <!-- CALENDAR -->
+        <div id="calendarbackground">
+
+        	<!-- DAYS GRID -->
+        	<ul>
+        		<li style="display: block;" id="day_0"></li>
+        		<li style="display: block;" id="day_1"></li>
+        		<li style="display: block;" id="day_2">1</li>
+        		<li style="display: block;" id="day_3">2</li>
+        		<li style="display: block;" id="day_4">3</li>
+        		<li style="display: block;" id="day_5">4</li>
+        		<li style="display: block;" id="day_6">5</li>
+        		<li style="display: block;" id="day_7">6</li>
+        		<li style="display: block;" id="day_8">7</li>
+        		<li style="display: block;" id="day_9">8</li>
+        		<li style="display: block;" id="day_10">9</li>
+        		<li style="display: block;" id="day_11">10</li>
+        		<li style="display: block;" id="day_12">11</li>
+        		<li style="display: block;" id="day_13">12</li>
+        		<li style="display: block;" id="day_14">13</li>
+        		<li style="display: block;" id="day_15">14</li>
+        		<li style="display: block;" id="day_16">15</li>
+        		<li style="display: block;" id="day_17">16</li>
+        		<li style="display: block;" id="day_18"><a href="javascript:selDateEvent(2804934635,'2013/01/17',0,'','day_18',false,'AGbIMNy_ZyaRHns0KodwQHIrKr8gAGkSYQ')%20;" title="Get Slim Guaranteed Seminar Organized by Body Mind Training">17</a></li>
+        		<li style="display: block;" id="day_19">18</li>
+        		<li style="display: block;" id="day_20">19</li>
+        		<li style="display: block;" id="day_21">20</li>
+        		<li style="display: block;" id="day_22">21</li>
+        		<li style="display: block;" id="day_23">22</li>
+        		<li style="display: block;" id="day_24">23</li>
+        		<li style="display: block;" id="day_25">24</li>
+        		<li style="display: block;" id="day_26">25</li>
+        		<li style="display: block;" id="day_27">26</li>
+        		<li style="display: block;" id="day_28">27</li>
+        		<li style="display: block;" id="day_29">28</li>
+        		<li style="display: block;" id="day_30">29</li>
+        		<li style="display: block;" id="day_31">30</li>
+        		<li style="display: block;" id="day_32">31</li>
+        		<li style="display: none;" id="day_33"></li>
+        		<li style="display: none;" id="day_34"></li>
+        		<li style="display: none;" id="day_35"></li>
+        		<li style="display: none;" id="day_36"></li>
+        		<li style="display: none;" id="day_37"></li>
+        		<li style="display: none;" id="day_38"></li>
+        		<li style="display: none;" id="day_39"></li>
+        		<li style="display: none;" id="day_40"></li>
+        		<li style="display: none;" id="day_41"></li>
+
+        	</ul>
+        	<div class="clear"></div>
+        </div>  
+
+        <!-- SHADOW -->
+        <div class="calshadow"></div>
+
+        <!-- MULTIPLE DATES SELECT (max 20 events Per Day) -->
+        <div style="display: none;" id="ebcalmultipledates">
+
+        <h3 id="mult_event_title"></h3>
+        <div class="calshadow"></div>
+
+        <ul>
+        <li style="display: none;" id="event_0"></li>
+        <li style="display: none;" id="event_1"></li>
+        <li style="display: none;" id="event_2"></li>
+        <li style="display: none;" id="event_3"></li>
+        <li style="display: none;" id="event_4"></li>
+        <li style="display: none;" id="event_5"></li>
+        <li style="display: none;" id="event_6"></li>
+        <li style="display: none;" id="event_7"></li>
+        <li style="display: none;" id="event_8"></li>
+        <li style="display: none;" id="event_9"></li>
+        <li style="display: none;" id="event_10"></li>
+        <li style="display: none;" id="event_11"></li>
+        <li style="display: none;" id="event_12"></li>
+        <li style="display: none;" id="event_13"></li>
+        <li style="display: none;" id="event_14"></li>
+        <li style="display: none;" id="event_15"></li>
+        <li style="display: none;" id="event_16"></li>
+        <li style="display: none;" id="event_17"></li>
+        <li style="display: none;" id="event_18"></li>
+        <li style="display: none;" id="event_19"></li>
+
+        </ul>
+
+        </div>
+        <!-- MULTIPLE DATES SELECT ENDS -->
+
+		<div class="calshadow" id="thickLine"></div>
+							<div style="display: block;" id="event_window_register">
+
+						<!-- IMAGE -->
+						<div class="ebeventimage" id="display_eventlogo"></div>
+
+						<!-- NAME -->
+						<div class="ebeventname">
+								<a href="http://get-slim-guaranteed-seminar-2012.eventbrite.co.uk/?ref=ecal" target="_blank" id="display_eventname" style="display:block;">Get Slim Guaranteed Seminar</a>
+						</div>
+						
+						<!-- DATE -->
+						<div class="ebeventdate" id="display_eventdate" style="display:block;">January 17, 2013 at 6:45 PM&nbsp;<b>*</b><br>*&nbsp;(<b><i>Repeating Event</i></b>)</div>
+
+						<!-- VENUE -->
+						<div class="ebeventvenue">
+							<a href="http://www.eventbrite.co.uk/googlemap?eid=2804934635" title="Click to Display Google Map" target="_blank" id="display_eventvenue" style="display:none;">See below for London venues, times, presenters and other towns and cities</a>
+						</div>
+						
+						<!-- LOCATION -->   
+						<div class="ebeventlocation">
+							<a href="http://www.eventbrite.co.uk/googlemap?eid=2804934635" title="Click to Display Google Map" target="_blank" id="display_eventlocation" style="display:none;">See below for London venues, times, presenters and other towns and cities - </a>
+						</div>
+						
+						<!-- REGISTER -->
+						<div class="registernowbutton">
+								<a href="http://get-slim-guaranteed-seminar-2012.eventbrite.co.uk/?ref=ecal" id="display_eventregister" title="Register Now!" target="_blank" style="display:block;">Register Now!</a>
+
+						</div>
+						
+						<!-- TWEET THIS -->
+						<div class="twatthisevent"> 
+							<a href="http://twitter.com/home?status=Get%20Slim%20Guaranteed%20Seminar%20--%20http://get-slim-guaranteed-seminar-2012.eventbrite.co.uk/?ref=ecaltw" target="_blank" id="display_eventtweeter" style="display:block;">Tweet This Event</a>
+						</div>
+					</div>
+ 
+	</div>
+</div>
+
+<br>
+<div id="frt34635" style="text-align: center;">
+    
+</div>
+	<script type="text/javascript">
+		var cptEvent = 0;
+        calendarType(gSelectCalendarType,'LOAD');
+        updateCalendarNavigation(gCurrentCalendarDate);
+		document.getElementById('ebcalendar').style.display  = 'block';
+	</script>
+	
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." :  "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script><script src="calendar-widget_data/ga.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var pageTracker = _gat._getTracker("UA-141520-1");
+
+			pageTracker._trackPageview();
+
+	</script>
+
+
+
+</body></html>
+<!-- mc -->

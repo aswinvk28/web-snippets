@@ -1,0 +1,56 @@
+.five.columns {
+    width: 280px;
+}
+div.gdl-right-sidebar {
+    float: left;
+}
+.column, .columns {
+    display: inline;
+    float: left;
+    margin: 40px 10px 0;
+    position: relative;
+}
+.mt0 {
+    margin-top: 0 !important;
+}
+
+div.right-sidebar-wrapper {
+    box-shadow: 3px 0 3px -3px #ECECEC inset;
+}
+div.right-sidebar-wrapper {
+    border-left: 1px solid;
+    padding-left: 20px;
+    padding-top: 32px;
+}
+.gdl-divider, .custom-sidebar.gdl-divider div, .custom-sidebar.gdl-divider .custom-sidebar-title, .custom-sidebar.gdl-divider ul li {
+    border-color: #CBCECF !important;
+}
+
+div.custom-sidebar {
+    border-color: inherit;
+    clear: both;
+    margin-bottom: 40px;
+}
+
+div.custom-sidebar .textwidget {
+    margin-top: 15px;
+}
+div.custom-sidebar div {
+    border-color: inherit;
+}
+
+p {
+    margin: 0 0 20px;
+}
+
+p a {
+    line-height: inherit;
+}
+a {
+    color: #EF7F2C;
+}
+a {
+    color: inherit;
+    outline: 0 none;
+    text-decoration: none;
+}

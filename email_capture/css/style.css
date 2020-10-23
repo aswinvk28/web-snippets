@@ -1,0 +1,199 @@
+.row-fluid {
+  width: 100%;
+  *zoom: 1;
+}
+
+.row-fluid:before,
+.row-fluid:after {
+  display: table;
+  content: "";
+}
+
+.row-fluid:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.pull-left {
+	float: left;
+}
+
+.pull-right {
+	float: right;
+}
+
+label.form_label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.align_table {
+	border: none;
+	line-height: 27px;
+}
+
+.align_table td {
+	padding: 0;
+}
+
+.align_table .first {
+	font-size: 23px;
+	padding-left: 10px;
+	vertical-align: middle;
+	border: none;
+	width: 50%;
+}
+
+.align_table .second {
+	padding-right: 10px;
+	border: none;
+	width: 50%;
+}
+
+#subFormBooklet {
+	margin-bottom: 10px;
+}
+
+.form_container {
+	background-color: #f27f2f;
+	color: #fff;
+	font-family: "Arial";
+	padding: 3px;
+	padding-bottom: 10px;
+}
+
+.booklet_form_header {
+	background: url("../../resources_pack/booklet_form_header.png") 1px 1px no-repeat scroll transparent;
+	padding-top: 6px;
+	color: #f27f2f;
+	padding-bottom: 25px;
+}
+
+.booklet_form_header h3 {
+	margin: 0;
+	font-size: 18px;
+	text-align: center;
+}
+
+.booklet_form_footer {
+	background: url("../../resources_pack/booklet_form_footer.png") 0 0 no-repeat scroll transparent;
+	height: 39px;
+	display: block;
+	border: none;
+	margin: 0 0 10px 0;
+}
+
+.form_container .field_item {
+	width: 210px;
+	font-size: 13px;
+  	font-weight: normal;
+  	line-height: 21px;
+  	display: inline-block;
+  	height: 21px;
+  	padding: 4px;
+  	margin-bottom: 9px;
+  	margin-top: 4px;
+  	border: 1px solid #cccccc;
+}
+
+.form_container select.field_item {
+  	height: 31px;
+  	/* In IE7, the height of the select element cannot be changed by height, only font-size */
+	margion-bottom: 0;
+	margin-top: 0;
+	
+  	*margin-top: 4px;
+  	/* For IE7, add top margin to align select with labels */
+	
+  	line-height: 31px;
+  	width: 210px;
+  	border: 1px solid #bbb;
+}
+
+.form_container .form_set {
+	display: block;
+	border: none;
+	padding: 10px;
+	margin: 0;
+}
+
+.form_container .form_label {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.form_container .form_note {
+	margin: 0;
+	padding: 0 0 0 10px;
+}
+
+.shortcode-large-button {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 11px;
+    line-height: 18px;
+    margin: 8px 10px 0 0;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.form_container.border_radius_large {
+	-webkit-border-radius: 8px;
+  	-moz-border-radius: 8px;
+  	border-radius: 8px;
+}
+
+div.form_container .border_radius, div.form_container .border_radius_noscript {
+	-webkit-border-radius: 6px;
+  	-moz-border-radius: 6px;
+  	border-radius: 6px;
+}
+
+div.form_container .border_radius_small {
+	-webkit-border-radius: 4px;
+  	-moz-border-radius: 4px;
+  	border-radius: 4px;
+}
+
+.select_option {
+	position: relative;
+}
+
+.select_option .select_option_button {
+	background: url("../../resources_pack/select_option_button.png") 0 0 no-repeat scroll transparent;
+	height: 31px;
+	width: 34px;
+	display: block;
+	position: absolute;
+	right: 12px;
+	top: 0;
+}
+
+.privacy_link {
+	margin-left: 10px;
+	margin-top: 15px;
+	font-size: 13px;
+}
+
+.privacy_link.orange {
+	color: #f27f2f;
+}
+
+.form_note {
+	color: #fff;
+	font-size: 12px;
+}
