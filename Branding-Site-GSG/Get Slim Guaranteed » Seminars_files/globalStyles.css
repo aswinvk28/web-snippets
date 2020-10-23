@@ -1,0 +1,134 @@
+.hideme { display:none; }
+
+.optinContentArea
+{
+    width:100%;
+    margin:0px auto;
+}
+
+.imaiooptinDownarrow
+{
+    width:130px; margin:-75px auto 0px auto;
+}
+
+img.imaioImage
+{
+    margin:0px !important; 
+    padding:0px !important; 
+    border:none !important;
+}
+
+.optinBoxForm
+{
+     padding:0px 4px; margin:0px auto 0px auto;
+}
+
+.optinAppLinkArea
+{
+    padding:0px; margin:0px auto;
+}
+
+.optinVnlForm
+{
+    padding:0px; margin:0px auto 0px auto;
+}
+
+.optinVnlForm
+{
+    min-height:245px; padding:0px; margin:0px auto 0px auto;
+}
+
+.reviewAffLinkArea
+{
+    margin:0px 0px 10px 10px; float:right;
+}
+
+.reviewRatingArea
+{
+    width:100px; height:26px; margin:0px;
+}
+
+.reviewBG
+{
+    width:499px; margin:0px auto 0px auto; background-position: center; background-repeat:no-repeat;
+}
+
+.reviewBGTL
+{
+    width:499px; margin:0px auto 0px auto; background-position: center; background-repeat:no-repeat;
+}
+
+ul { list-style-image: none !important; }
+
+#fanbuzz-footer-widgets
+{
+    width:810px;
+    margin: 0px auto 0px auto;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    vertical-align: baseline;
+    float:left;
+}
+
+#fanbuzz-footer-widgets .fwidget-area
+{
+    float: left;
+    width:270px;
+}
+
+#fanbuzz-footer-widgets #fwfirst{}
+
+#fanbuzz-footer-widgets #fwsecond{}
+
+#fanbuzz-footer-widgets #fwthird{}
+
+
+#header-widget, #header-text
+{
+    position:absolute;
+    margin:0px;
+    padding:0px;
+}
+
+/*  may be used to customize the like button in the future
+#imaiofptoplikebuttonholder
+{
+    position:relative;
+    width:60px;
+    height: 26px;
+    color:#fff;
+    background:black;
+    overflow: hidden;
+}
+#imaiofptoplikebuttonholder iframe
+{
+    position:absolute;
+    top: 0px;
+    width: 60px !important;    
+    height: 26px !important;
+    overflow: hidden;
+}
+
+#imaiofplikebutton
+{
+	pointer-events: none;
+	position:absolute;
+	width: 60px;
+	height: 26px;
+	left:0;
+	top:0;
+}
+
+#imaiofplikeloading
+{
+	position:absolute;
+        z-index:10000;
+	width: 60px;
+	height: 26px;
+        background-color:#ffffff;
+	left:0;
+	top:0;
+        padding-left:22px;
+}
+*/
